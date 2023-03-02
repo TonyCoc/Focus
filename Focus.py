@@ -9,7 +9,7 @@ import threading
 
 '''
 
-@WinchesterAge
+@TonyCoc
 
 
 i made this app to keep me focused while i'm reading my leasons 
