@@ -67,7 +67,8 @@ if __name__ == "__main__":
     is_running = False
 
     def clicked():
-
+        
+        button.destroy()
         
 
         def count():
