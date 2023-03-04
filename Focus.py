@@ -16,11 +16,12 @@ i made this app to keep me focused while i'm reading my leasons
 OR coding other programms
 
 '''
+
 class focus:
     
     def __init__(self, task, dur):
-        self.task = task
-        self.dur = dur
+        self.task = task #programm name
+        self.dur = dur #block Time
         
 
     def process_kill(self):
@@ -38,7 +39,7 @@ class focus:
         passed_time = 0   #sec
 
         
-        while passed_time < self.dur * 60:
+        while passed_time < self.dur * 60:         # multiply by 60 becuase we want seconds
             
                 command = subprocess.Popen(['powershell.exe','ps',self.task],stdout=subprocess.PIPE,shell=False)
 
@@ -55,8 +56,9 @@ class focus:
                             command = subprocess.run(['powershell.exe','kill',pure_output[ind-2]],shell=False)    #index of pId == process name index - 2
                             os.system("cls")
         
-                time.sleep(1.0)
+                time.sleep(2.0)
                 passed_time += 1
+        
 
 
 
@@ -64,7 +66,6 @@ class focus:
 
 if __name__ == "__main__":
 
-    is_running = False
 
     def clicked():
         
@@ -78,8 +79,6 @@ if __name__ == "__main__":
                 time.sleep(60.0)
                 Min -= 1
             
-            l.config(foreground="Green")
-            
             time.sleep(1)
 
             root.destroy()
@@ -92,11 +91,13 @@ if __name__ == "__main__":
         
         
         f = focus(task=process_name.get(), dur=time_b.get())
-        t1 = threading.Thread(target=f.process_kill).start()
+        
+        threading.Thread(target=f.process_kill).start()
+        
         l = ttk.Label(text="")
         l.pack()
         
-        t2 = threading.Thread(target=count).start()
+        threading.Thread(target=count).start()
         
         
      
@@ -126,6 +127,10 @@ if __name__ == "__main__":
     button.pack(expand=True)
     
     
+    
     root.mainloop()
+
+    os.kill(os.getpid(), 9) #close console Window In end of programm
+    
     
 
